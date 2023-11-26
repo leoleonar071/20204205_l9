@@ -145,7 +145,7 @@ public class UsuarioDao extends DaoBase{
 
 
     public boolean validarPassword(String correo, String password) {
-        String sql = "SELECT * FROM usuario WHERE correo = ? AND password = ?";
+        String sql = "SELECT * FROM usuarios WHERE correo = ? AND password = ?";
         boolean exito = false;
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
