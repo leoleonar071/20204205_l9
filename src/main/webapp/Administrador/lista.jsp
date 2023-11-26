@@ -1,22 +1,22 @@
 <%@page import="java.util.ArrayList" %>
 <%@ page import="com.example.lab9_20204205.model.beans.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<jsp:useBean id="listaDecanos" type="java.util.ArrayList<com.example.lab9_20204205.model.beans.Usuario>" scope="request"/>
+<jsp:useBean id="listaRectores" type="java.util.ArrayList<com.example.lab9_20204205.model.beans.Usuario>" scope="request"/>
 <jsp:useBean id="usuarioLogueado" class="com.example.lab9_20204205.model.beans.Usuario" type="com.example.lab9_20204205.model.beans.Usuario" scope="session" />
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista decanos</title>
+    <title>Lista Rectores</title>
     <jsp:include page="../includes/headCss.jsp"></jsp:include>
 </head>
 <body>
 <div class='container'>
-    <jsp:include page="../includes/navbarRector.jsp">
+    <jsp:include page="../includes/navbarAdministrador.jsp">
         <jsp:param name="currentPage" value="emp"/>
     </jsp:include>
     <div class="row mb-5 mt-4">
         <div class="col-md-7">
-            <h1>Lista de Decanos</h1>
+            <h1>Lista de Rectores</h1>
         </div>
         <div class="col-md-5 col-lg-4 ms-auto my-auto text-md-end">
             <a href="<%= request.getContextPath()%>/rector?action=agregar_decano" class="btn btn-primary">Agregar
@@ -50,7 +50,7 @@
         <tbody>
         <%
             int i = 1;
-            for (Usuario e : listaDecanos) {
+            for (Usuario e : listaRectores) {
         %>
         <tr>
             <td><%= i%>

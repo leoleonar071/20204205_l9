@@ -71,11 +71,10 @@ public class RectorServlet extends HttpServlet{
 
 
 
-                view = request.getRequestDispatcher("/rector/crear_decano.jsp");
+                view = request.getRequestDispatcher("/rector/formularioNuevo.jsp");
                 view.forward(request, response);
 
 
-                request.getRequestDispatcher("rector/lista.jsp").forward(request,response);
 
                 break;
 
@@ -87,7 +86,7 @@ public class RectorServlet extends HttpServlet{
 
                 if(rectorBuscado != null){
                     request.setAttribute("rectorBuscado", rectorBuscado);
-                    request.getRequestDispatcher("/rector/edit_ decano.jsp").forward(request,response);
+                    request.getRequestDispatcher("/rector/formularioEditar.jsp").forward(request,response);
                 }else{
                     response.sendRedirect("rector");
                 }

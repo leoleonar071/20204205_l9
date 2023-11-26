@@ -14,14 +14,14 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link <%=currentPage.equals("emp") ? "active" : ""%>"
-                       href="<%=request.getContextPath()%>/rector">
-                        Decanos
+                       href="<%=request.getContextPath()%>/Administrador">
+                        Rectores
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <%=currentPage.equals("job") ? "active" : ""%>"
-                       href="<%=request.getContextPath()%>/rector?action=lista_facultades">
-                        Facultades
+                       href="<%=request.getContextPath()%>/Administrador?action=lista_facultades">
+                        Universidades
                     </a>
                 </li>
 

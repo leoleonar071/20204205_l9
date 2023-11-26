@@ -29,6 +29,23 @@ public class UsuarioDao extends DaoBase{
         return usuarios;
     }
 
+    public List<Usuario> listarUsuariosConIdRolDos() {
+        List<Usuario> usuarios = new ArrayList<>();
+        String sql = "SELECT * FROM usuario WHERE idrol = 2";
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Usuario usuario = fetchUsuarioData(rs);
+                usuarios.add(usuario);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return usuarios;
+    }
+
     public void guardarUsuarioConIdRolTres(Usuario usuario) throws SQLException {
         String sql = "INSERT INTO usuarios (nombre, correo, password, fecha_registro, idrol,cantidad_ingresos,fecha_edicion) "
                 + "VALUES (?, ?, ?, ?, 3,0,?)";
