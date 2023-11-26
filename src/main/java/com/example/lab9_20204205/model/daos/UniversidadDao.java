@@ -1,6 +1,7 @@
 package com.example.lab9_20204205.model.daos;
 
 
+import com.example.lab9_20204205.model.beans.Facultad;
 import com.example.lab9_20204205.model.beans.Universidad;
 
 import java.sql.*;
@@ -29,6 +30,27 @@ public class UniversidadDao extends DaoBase {
 
         return listaUniversidades;
     }
+
+    public List<Facultad> listarfacultades() {
+        List<Facultad> listaFacultades = new ArrayList<>();
+
+        String sql = "SELECT * FROM facultad";
+
+        try (Connection conn = this.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Facultad facultad = fetchFacultadData(rs);
+                listaFacultades.add(facultad); // Corregido el nombre de la variable
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return listaFacultades;
+    }
+
 
     public Universidad obtenerUniversidad(int idUniversidad) {
         Universidad universidad = null;
@@ -114,5 +136,16 @@ public class UniversidadDao extends DaoBase {
         universidad.setFecha_edicion(rs.getObject("fecha_edicion", LocalDateTime.class));
         return universidad;
     }
+
+    private Facultad fetchFacultadData(ResultSet rs) throws SQLException {
+        Facultad facultad = new Facultad();
+        facultad.setIdfacultad(rs.getInt("idfacultad"));
+        facultad.setNombre(rs.getString("nombre"));
+        facultad.setIduniversidad(rs.getInt("iduniversidad"));
+        facultad.setFechga_registro(rs.getObject("fechga_registro", LocalDateTime.class));
+        facultad.setFecha_edicion(rs.getObject("fecha_edicion", LocalDateTime.class));
+        return facultad;
+    }
+
 }
 

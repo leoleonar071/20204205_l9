@@ -1,5 +1,6 @@
 package com.example.lab9_20204205.servlets;
 import com.example.lab9_20204205.model.beans.*;
+import com.example.lab9_20204205.model.daos.UniversidadDao;
 import com.example.lab9_20204205.model.daos.UsuarioDao;
 
 import jakarta.servlet.*;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @MultipartConfig
-@WebServlet(name = "Rector", value = "/rector_dashboard")
+@WebServlet(name = "rector", value = "/rector")
 
 
 public class RectorServlet extends HttpServlet{
@@ -26,40 +27,55 @@ public class RectorServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        String action = request.getParameter("action") == null? "home" : request.getParameter("action");
+        String action = request.getParameter("action") == null? "lista" : request.getParameter("action");
         RequestDispatcher view;
 
         switch (action){
-            case "home":
+            case "lista":
 
                 HttpSession session = request.getSession(); //Estaba en False
 
                 if (session != null) {
-                    int idUsr = (int) session.getAttribute("id");
 
-                    ArrayList<Usuario> lista_decanos= (ArrayList<Usuario>) usuarioDao.listarUsuariosConIdRolTres();
-                    System.out.println(lista_decanos);
+                    request.setAttribute("listaDecanos", usuarioDao.listarUsuariosConIdRolTres());
+                    view = request.getRequestDispatcher("/rector/lista.jsp");
+                    view.forward(request, response);
 
 
-                    request.setAttribute("lista_decanos", lista_decanos);
-                    request.getRequestDispatcher("/pages/admin_act/home.jsp").forward(request,response);
+
 
                 } else {
                     request.getRequestDispatcher("login?action=unvalid_session").forward(request,response);
                 }
                 break;
 
-            case "agregar_decano":
 
-                request.setAttribute("listadecanos", usuarioDao.listarUsuariosConIdRolTres();
-
+            case "lista_facultades":
 
 
-                view = request.getRequestDispatcher("/pages/decano/crear_decano.jsp");
+
+                UniversidadDao universidadDao=new UniversidadDao();
+                request.setAttribute("listar_facultades", universidadDao.listarfacultades());
+                view = request.getRequestDispatcher("/rector/facultades.jsp");
                 view.forward(request, response);
 
 
-                request.getRequestDispatcher("/pages/decano/rector_dashboard.jsp").forward(request,response);
+
+
+
+                break;
+
+            case "agregar_decano":
+
+                request.setAttribute("listadecanos", usuarioDao.listarUsuariosConIdRolTres());
+
+
+
+                view = request.getRequestDispatcher("/rector/crear_decano.jsp");
+                view.forward(request, response);
+
+
+                request.getRequestDispatcher("rector/lista.jsp").forward(request,response);
 
                 break;
 
@@ -71,9 +87,9 @@ public class RectorServlet extends HttpServlet{
 
                 if(rectorBuscado != null){
                     request.setAttribute("rectorBuscado", rectorBuscado);
-                    request.getRequestDispatcher("/pages/decano/edit_decano.jsp").forward(request,response);
+                    request.getRequestDispatcher("/rector/edit_ decano.jsp").forward(request,response);
                 }else{
-                    response.sendRedirect(request.getContextPath()+"/rector_dashboard");
+                    response.sendRedirect("rector");
                 }
 
 
@@ -86,7 +102,7 @@ public class RectorServlet extends HttpServlet{
 
 
 
-                response.sendRedirect(request.getContextPath() +"/rector_dashboard");
+                response.sendRedirect("RectorServlet");
                 break;
 
 
@@ -125,17 +141,17 @@ public class RectorServlet extends HttpServlet{
                 if (request.getParameter("usuario_id") == null) {
                 try {
                     usuarioDao.guardarUsuarioConIdRolTres(new_decano);
-                    response.sendRedirect("RectorServlet?msg=Decano creado exitosamente");
+                    response.sendRedirect("rector?msg=Decano creado exitosamente");
                 } catch (SQLException ex) {
-                    response.sendRedirect("RectorServlet?err=Decano al crear empleado");
+                    response.sendRedirect("rector?err=Decano al crear empleado");
                 }
                 } else {
                      new_decano.setIdusuario(Integer.parseInt(request.getParameter("usuario_id")));
                     try {
                         usuarioDao.actualizarUsuarioConIdRolTres(new_decano);
-                        response.sendRedirect("RectorServlet?msg=Empleado actualizado exitosamente");
+                        response.sendRedirect("rector?msg=Empleado actualizado exitosamente");
                     } catch (SQLException ex) {
-                        response.sendRedirect("RectorServlet?err=Error al actualizar empleado");
+                        response.sendRedirect("rector?err=Error al actualizar empleado");
                     }
 
                 }

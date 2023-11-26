@@ -59,7 +59,8 @@ public class LoginServlet extends HttpServlet {
                     break;
 
                 case 2:
-                    response.sendRedirect("Rector");
+                    response.sendRedirect("rector");
+                    System.out.println("Entro a rectorborar");
                     break;
 
                 case 3:
