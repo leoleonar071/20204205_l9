@@ -9,17 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7dfa94af-d45a-4136-b40c-a6bf099e9983" name="Changes" comment="beans">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/sign-in.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/css/signin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/resources/js/jquery-3.6.0.min.js" afterDir="false" />
+    <list default="true" id="7dfa94af-d45a-4136-b40c-a6bf099e9983" name="Changes" comment="20%">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab9_20204205/HelloServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab9_20204205/HelloServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab9_20204205/model/daos/UsuarioDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab9_20204205/model/daos/UsuarioDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +120,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1701009623662</updated>
-      <workItem from="1701009624831" duration="2136000" />
+      <workItem from="1701009624831" duration="10981000" />
     </task>
     <task id="LOCAL-00001" summary="beans">
       <option name="closed" value="true" />
@@ -154,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701010483966</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="20%">
+      <option name="closed" value="true" />
+      <created>1701011871654</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701011871654</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +162,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="beans" />
-    <option name="LAST_COMMIT_MESSAGE" value="beans" />
+    <MESSAGE value="20%" />
+    <option name="LAST_COMMIT_MESSAGE" value="20%" />
   </component>
 </project>

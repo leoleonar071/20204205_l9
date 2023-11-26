@@ -30,11 +30,19 @@ public class UsuarioDao extends DaoBase{
     }
 
     public void guardarUsuarioConIdRolTres(Usuario usuario) throws SQLException {
-        String sql = "INSERT INTO usuarios (nombre, correo, password, fecha_registro, idrol) "
-                + "VALUES (?, ?, ?, ?, 3)";
+        String sql = "INSERT INTO usuarios (nombre, correo, password, fecha_registro, idrol,cantidad_ingresos,fecha_edicion) "
+                + "VALUES (?, ?, ?, ?, 3,0,?)";
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             setUsuarioParams(pstmt, usuario);
+            // Obtener la fecha actual en formato java.time.LocalDateTime
+            LocalDateTime fechaActual = LocalDateTime.now();
+
+            // Convertir LocalDateTime a java.sql.Timestamp para usarlo en la consulta
+            Timestamp timestamp = Timestamp.valueOf(fechaActual);
+
+            pstmt.setTimestamp(4, timestamp);
+            pstmt.setTimestamp(7, timestamp);
             pstmt.executeUpdate();
         }
     }
@@ -45,6 +53,15 @@ public class UsuarioDao extends DaoBase{
         try (Connection conn = this.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             setUsuarioParams(pstmt, usuario);
+
+            // Obtener la fecha actual en formato java.time.LocalDateTime
+            LocalDateTime fechaActual = LocalDateTime.now();
+
+            // Convertir LocalDateTime a java.sql.Timestamp para usarlo en la consulta
+            Timestamp timestamp = Timestamp.valueOf(fechaActual);
+
+            pstmt.setTimestamp(4, timestamp);
+
             pstmt.setInt(5, usuario.getIdusuario());
             pstmt.executeUpdate();
         }
@@ -78,6 +95,24 @@ public class UsuarioDao extends DaoBase{
             pstmt.executeUpdate();
         }
     }
+
+    public void eliminarUsuarioPorCorreo(String correo) {
+        String sql = "DELETE FROM usuarios WHERE correo = ?";
+        boolean eliminado = false;
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, correo);
+            int filasEliminadas = pstmt.executeUpdate();
+
+            eliminado = filasEliminadas > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
 
     public void actualizarUsuarioConIdRolCuatro(Usuario usuario) throws SQLException {
         String sql = "UPDATE usuarios SET nombre = ?, correo = ?, password = ?, fecha_edicion = ? "
@@ -120,7 +155,10 @@ public class UsuarioDao extends DaoBase{
         pstmt.setString(1, usuario.getNombre());
         pstmt.setString(2, usuario.getCorreo());
         pstmt.setString(3, usuario.getPassword());
-        pstmt.setObject(4, usuario.getFecha_edicion(), Types.TIMESTAMP);
+
+
+
+
     }
 
     private Usuario fetchUsuarioData(ResultSet rs) throws SQLException {
@@ -129,6 +167,8 @@ public class UsuarioDao extends DaoBase{
         usuario.setNombre(rs.getString("nombre"));
         usuario.setCorreo(rs.getString("correo"));
         usuario.setPassword(rs.getString("password"));
+
+
         usuario.setFecha_registro(rs.getObject("fecha_registro", LocalDateTime.class));
         usuario.setFecha_edicion(rs.getObject("fecha_edicion", LocalDateTime.class));
         usuario.setIdrol(rs.getInt("idrol"));
